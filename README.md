@@ -5,4 +5,4 @@
 # Install
 [点我安装](https://github.com/bitdust/Douban2Piratebay/raw/master/Douban2Piratebay.user.js) 
 # Screenshot
-![Screenshot](.\screenshot.gif)
+![Screenshot](./screenshot.gif)
