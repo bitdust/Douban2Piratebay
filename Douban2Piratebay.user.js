@@ -22,25 +22,33 @@
     );
     var imdblink = null;
     var imdbRe = new RegExp("tt[0-9]{4,}");
-    for (var i=0;i<links.length;i++) {
+    for (var i=0; i<links.length; i++) {
         if(imdbRe.test(links[i].textContent)) {
             imdblink = links[i];
             break;
         }
     }
 
-    if (imdblink !== null) {
-        var imdbindex = imdblink.innerText;
-        var fragment = document.createDocumentFragment();
-        var br = document.createElement("br");
-        var parent = imdblink.parentElement;
-        var span = imdblink.previousElementSibling.cloneNode(false);
-        span.textContent = "海盗湾链接: ";
-        var a = imdblink.cloneNode(true);
-        a.href = 'https://thepiratebay.org/search/' + imdbindex;
+    function addLink(name, href){
+        let imdbindex = imdblink.innerText;
+        let fragment = document.createDocumentFragment();
+        let br = document.createElement("br");
+        let parent = imdblink.parentElement;
+        let span = imdblink.previousElementSibling.cloneNode(false);
+        span.textContent = name + "链接: ";
+        let a = imdblink.cloneNode(true);
+        a.textContent = "下载";
+        a.href = href + imdbindex;
         fragment.appendChild(br);
         fragment.appendChild(span);
         fragment.appendChild(a);
         insertAfter(fragment, imdblink);
+    }
+
+    if (imdblink !== null) {
+       addLink("电影天堂", 'http://www.btrr.net/tag/');
+       addLink("HD湾", 'http://www.hdwan.net/?s=');
+       addLink("RARGB", 'https://rarbgmirror.com/torrents.php?imdb=');
+       addLink("海盗湾", 'https://thepiratebay.org/search/');
     }
 })();
