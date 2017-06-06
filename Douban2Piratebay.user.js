@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Douban2Piratebay
 // @namespace    https://github.com/bitdust/Douban2Piratebay/
-// @version      0.5
+// @version      0.6
 // @description  And direct link to piratebay from douban movie page.
 // @author       bitdust
 // @match        https://movie.douban.com/subject/*
@@ -16,6 +16,13 @@
     function insertAfter(newNode, referenceNode) {
         referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
     }
+    
+    function addLink(fragment, text, href){
+        let a = imdblink.cloneNode(true);
+        a.textContent = text;
+        a.href = href;
+        fragment.appendChild(a);
+    }
 
     var links =  document.querySelectorAll (
         "#info > a"
@@ -29,26 +36,18 @@
         }
     }
 
-    function addLink(name, href){
-        let imdbindex = imdblink.innerText;
-        let fragment = document.createDocumentFragment();
-        let br = document.createElement("br");
-        let parent = imdblink.parentElement;
-        let span = imdblink.previousElementSibling.cloneNode(false);
-        span.textContent = name + "链接: ";
-        let a = imdblink.cloneNode(true);
-        a.textContent = "下载";
-        a.href = href + imdbindex;
-        fragment.appendChild(br);
-        fragment.appendChild(span);
-        fragment.appendChild(a);
-        insertAfter(fragment, imdblink);
-    }
-
     if (imdblink !== null) {
-       addLink("电影天堂", 'http://www.btrr.net/tag/');
-       addLink("HD湾", 'http://www.hdwan.net/?s=');
-       addLink("RARGB", 'https://rarbgmirror.com/torrents.php?imdb=');
-       addLink("海盗湾", 'https://thepiratebay.org/search/');
+       var imdbindex = imdblink.innerText;
+       var fragment = document.createDocumentFragment();
+       var br = document.createElement("br");
+       var span = imdblink.previousElementSibling.cloneNode(false);
+       span.textContent = "资源：";
+       fragment.appendChild(br);
+       fragment.appendChild(span);
+       addLink(fragment, "TPB ", 'https://thepiratebay.org/search/' + imdbindex);
+       addLink(fragment, "RARGB ", 'https://rarbgmirror.com/torrents.php?imdb=' + imdbindex);
+       addLink(fragment, "HD湾 ", 'http://www.hdwan.net/?s=' + imdbindex);
+       addLink(fragment, "电影天堂 ", 'http://www.btrr.net/?s=' + imdbindex);
+       insertAfter(fragment, imdblink);
     }
 })();
