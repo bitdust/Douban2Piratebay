@@ -1,0 +1,36 @@
+{
+  "name": "Douban2Piratebay",
+  "version": "0.0.2",
+  "short_name": "D2P",
+  "manifest_version": 2,
+  "description": "豆瓣电影页面中添加下载链接",
+  "homepage_url": "https://github.com/bitdust/Douban2Piratebay",
+  "icons": {
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ],
+    "persistent": true
+  },
+  "page_action": {
+    "default_icon": "icons/icon128.png",
+    "default_title": "Douban2Piratebay",
+    "default_popup": "src/page_action/page_action.html"
+  },
+  "permissions": [
+    "https://movie.douban.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://movie.douban.com/*"
+      ],
+      "js": [
+        "src/inject/inject.js"
+      ]
+    }
+  ]
+}
