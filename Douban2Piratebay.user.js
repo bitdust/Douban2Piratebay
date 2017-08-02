@@ -42,6 +42,8 @@
        var br = document.createElement("br");
        var span = imdblink.previousElementSibling.cloneNode(false);
        span.textContent = "资源：";
+       //资源提示阔以明显
+       span.style = "color:red";
        fragment.appendChild(br);
        fragment.appendChild(span);
        addLink(fragment, "TPB ", 'https://thepiratebay.org/search/' + imdbindex);
