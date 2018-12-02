@@ -1,5 +1,5 @@
 # Douban2Piratebay
-在豆瓣电影页面里添加一个指向海盗湾的链接 
+在豆瓣电影页面里添加指向海盗湾等下载站的链接 
 ## Depends on
 请确认已安装 [tampermonkey](http://tampermonkey.net/) 或 [greasemonkey](http://www.greasespot.net/) 插件 
 ## Install
