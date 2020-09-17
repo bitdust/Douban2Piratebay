@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Douban2Piratebay
 // @namespace    https://github.com/bitdust/Douban2Piratebay/
-// @version      0.6
+// @version      0.7
 // @description  And direct link to piratebay from douban movie page.
 // @author       bitdust
 // @match        https://movie.douban.com/subject/*
@@ -45,9 +45,7 @@
        fragment.appendChild(br);
        fragment.appendChild(span);
        addLink(fragment, "TPB ", 'https://thepiratebay.org/search/' + imdbindex);
-       addLink(fragment, "RARGB ", 'https://rarbgmirror.com/torrents.php?imdb=' + imdbindex);
-       addLink(fragment, "HD湾 ", 'http://www.hdwan.net/?s=' + imdbindex);
-       addLink(fragment, "电影天堂 ", 'http://www.btrr.net/?s=' + imdbindex);
+       addLink(fragment, "RARGB ", 'https://rarbgmirror.com/torrents.php?search=' + imdbindex);
        insertAfter(fragment, imdblink);
     }
 })();
