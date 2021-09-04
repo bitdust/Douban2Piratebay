@@ -14,38 +14,40 @@
     'use strict';
 
     function insertAfter(newNode, referenceNode) {
-        referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+        $(newNode).appendTo(referenceNode);
     }
     
     function addLink(fragment, text, href){
-        let a = imdblink.cloneNode(true);
+        let a = document.createElement("a")
         a.textContent = text;
         a.href = href;
         fragment.appendChild(a);
     }
 
     var links =  document.querySelectorAll (
-        "#info > a"
+        "#info"
     );
-    var imdblink = null;
-    var imdbRe = new RegExp("tt[0-9]{4,}");
+    var imdbLink = null;
+    var imdbindex = null;
+    var imdbRe=new RegExp(".*?(tt[0-9]{4,})");
     for (var i=0; i<links.length; i++) {
         if(imdbRe.test(links[i].textContent)) {
-            imdblink = links[i];
+            imdbLink = links[i];
+            imdbindex = imdbRe.exec(links[i].textContent)[1];
             break;
         }
     }
 
-    if (imdblink !== null) {
-       var imdbindex = imdblink.innerText;
+    if (imdbindex !== null) {
        var fragment = document.createDocumentFragment();
        var br = document.createElement("br");
-       var span = imdblink.previousElementSibling.cloneNode(false);
-       span.textContent = "资源：";
-       fragment.appendChild(br);
+       var span = document.createElement("span")
+       span.class="pl"
+       span.textContent = "资源: ";
        fragment.appendChild(span);
        addLink(fragment, "TPB ", 'https://thepiratebay.org/search/' + imdbindex);
        addLink(fragment, "RARGB ", 'https://rarbgmirror.com/torrents.php?search=' + imdbindex);
-       insertAfter(fragment, imdblink);
+       fragment.appendChild(br);
+       insertAfter(fragment, imdbLink);
     }
 })();
